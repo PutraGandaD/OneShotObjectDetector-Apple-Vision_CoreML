@@ -31,33 +31,43 @@ class PreviewView: UIView {
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }
-
+    
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
         return layer as? AVCaptureVideoPreviewLayer ?? AVCaptureVideoPreviewLayer()
     }
     
-    // Automatically called when the device rotates and the view is resized
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // Ensure we have a valid connection and it supports orientation
+        videoPreviewLayer.frame = self.bounds
+        
         guard let connection = videoPreviewLayer.connection,
               connection.isVideoOrientationSupported else { return }
         
-        // Get the current window scene's orientation (iOS 13+)
-        if let windowScene = self.window?.windowScene {
-            connection.videoOrientation = videoOrientation(from: windowScene.interfaceOrientation)
-        }
-    }
-    
-    // Helper to map UIInterfaceOrientation to AVCaptureVideoOrientation
-    private func videoOrientation(from interfaceOrientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
-        switch interfaceOrientation {
-        case .portrait: return .portrait
-        case .landscapeLeft: return .landscapeLeft
-        case .landscapeRight: return .landscapeRight
-        case .portraitUpsideDown: return .portraitUpsideDown
-        default: return .portrait
+        switch UIDevice.current.orientation {
+            // Home button on top
+        case .portraitUpsideDown:
+            print("portraitUpsideDown")
+            connection.videoOrientation = .portraitUpsideDown
+            
+            // Home button on right
+        case .landscapeLeft:
+            print("landscapeLeft")
+            connection.videoOrientation = .landscapeRight
+            
+            // Home button on left
+        case .landscapeRight:
+            print("landscapeRight")
+            connection.videoOrientation = .landscapeLeft
+              
+      // Home button at bottom
+        case .portrait:
+            print("portrait")
+            connection.videoOrientation = .portrait
+      
+        default:
+            print("📸 DEBUG: Device orientation is unknown or flat (\(UIDevice.current.orientation.rawValue)). Keeping current video orientation.")
+            break
         }
     }
 }

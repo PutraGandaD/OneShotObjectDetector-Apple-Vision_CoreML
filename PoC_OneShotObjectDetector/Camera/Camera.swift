@@ -39,6 +39,8 @@ class Camera: NSObject, AVCapturePhotoCaptureDelegate {
 
     /// Set up the capture session.
     func setup() -> Bool {
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        
         resetSession()
         
         session.beginConfiguration()
