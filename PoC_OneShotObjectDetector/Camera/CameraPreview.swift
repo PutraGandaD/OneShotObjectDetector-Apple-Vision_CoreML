@@ -35,4 +35,29 @@ class PreviewView: UIView {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
         return layer as? AVCaptureVideoPreviewLayer ?? AVCaptureVideoPreviewLayer()
     }
+    
+    // Automatically called when the device rotates and the view is resized
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Ensure we have a valid connection and it supports orientation
+        guard let connection = videoPreviewLayer.connection,
+              connection.isVideoOrientationSupported else { return }
+        
+        // Get the current window scene's orientation (iOS 13+)
+        if let windowScene = self.window?.windowScene {
+            connection.videoOrientation = videoOrientation(from: windowScene.interfaceOrientation)
+        }
+    }
+    
+    // Helper to map UIInterfaceOrientation to AVCaptureVideoOrientation
+    private func videoOrientation(from interfaceOrientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
+        switch interfaceOrientation {
+        case .portrait: return .portrait
+        case .landscapeLeft: return .landscapeLeft
+        case .landscapeRight: return .landscapeRight
+        case .portraitUpsideDown: return .portraitUpsideDown
+        default: return .portrait
+        }
+    }
 }
