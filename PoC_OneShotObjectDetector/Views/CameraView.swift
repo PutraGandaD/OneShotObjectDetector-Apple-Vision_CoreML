@@ -1,22 +1,15 @@
-//
-//  CameraView.swift
-//  PoC_OneShotObjectDetector
-//
-//  Created by Putra Ganda Dewata on 20/05/26.
-//
-
 import SwiftUI
 
 struct CameraView: View {
     @State var camera = Camera()
     @State var didSetupCamera = Bool()
     
-    @Binding var imageData: Data? // image data from camera
+    @Binding var imageData: Data?
     @Binding var hasPhoto: Bool
     @Binding var showCamera: Bool
     @Binding var showAccessError: Bool
     
-    @Environment(\.scenePhase) var scenePhase // detect lifecycle of app
+    @Environment(\.scenePhase) var scenePhase
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -73,7 +66,3 @@ struct CaptureButtonStyle: ButtonStyle {
     }
 }
 
-
-#Preview {
-//    CameraView()
-}

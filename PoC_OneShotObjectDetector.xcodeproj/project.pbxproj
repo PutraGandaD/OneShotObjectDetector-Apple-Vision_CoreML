@@ -6,13 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		85461E442FD61C4100D47FFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85461E432FD61C4100D47FFE /* AppDelegate.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		850871F02FBDF0E700F7F3EC /* PoC_OneShotObjectDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoC_OneShotObjectDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		85461E432FD61C4100D47FFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,7 +32,6 @@
 		850871E72FBDF0E700F7F3EC = {
 			isa = PBXGroup;
 			children = (
-				85461E432FD61C4100D47FFE /* AppDelegate.swift */,
 				850871F22FBDF0E700F7F3EC /* PoC_OneShotObjectDetector */,
 				850871F12FBDF0E700F7F3EC /* Products */,
 			);
@@ -125,7 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85461E442FD61C4100D47FFE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
